@@ -19,6 +19,7 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>17</version>
+            <type>jar</type>
         </dependency>
     </dependencies>
     <build>
