@@ -23,7 +23,7 @@ public class ClientCredentials {
     }
     static class DBManager
     {
-        static bool ValidateToken(String username, String token)
+        static boolean ValidateToken(String username, String token)
         {
             
         }
