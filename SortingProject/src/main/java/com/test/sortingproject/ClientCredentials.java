@@ -25,7 +25,8 @@ public class ClientCredentials {
     {
         static boolean ValidateToken(String username, String token)
         {
-            
+            //TODO
+            return false;
         }
     }
     public void Login(String username, String password)
