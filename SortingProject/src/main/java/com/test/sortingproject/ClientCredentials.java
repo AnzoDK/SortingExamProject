@@ -12,31 +12,20 @@ import javax.sql.*;
 public class ClientCredentials {
     static class Holder
     {
-            public void Setup(String user, String token)
+            public void Setup(String user)
             {
                 m_username = user;
-                m_sessionToken = token;
             }
             private String m_username;
     
-            private String m_sessionToken;
     }
     static class DBManager
     {
-        static boolean ValidateToken(String username, String token)
+
+        public boolean Login(String username, String password)
         {
-            //TODO
-            return false;
+            
         }
-    }
-    public void Login(String username, String password)
-    {
-        
-    }
-    
-    private void m_GenerateToken()
-    {
-    
     }
     
 
