@@ -32,6 +32,11 @@
             <version>15.0.1</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-base</artifactId>
+            <version>15.0.1</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
