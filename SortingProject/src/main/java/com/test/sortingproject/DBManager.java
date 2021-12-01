@@ -22,22 +22,9 @@ public class DBManager
         Connection conn = null;
         public boolean Login(String username, String password) throws NoSuchAlgorithmException
         {
-            //TODO
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(password.getBytes(StandardCharsets.UTF_8));
-            byte[] bytes = /*md.digest(password.getBytes(StandardCharsets.UTF_8));*/ md.digest();
-            String hash="";
-            StringBuilder hexString = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) 
-            {
-                String hex = Integer.toHexString(0xff & bytes[i]);
-                if(hex.length() == 1)
-                {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-            hash = hexString.toString();
+            
+            String hash = Encryptor.EncryptString(password);
+            
             String getUsernameSql = "SELECT username, password FROM Users WHERE username='" + username + "'";
             try
             {
