@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="579.0" prefWidth="654.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.test.sortingproject.SignUpController">
+   <children>
+      <Label layoutX="300.0" layoutY="23.0" prefHeight="16.0" prefWidth="55.0" text="Sign Up" />
+      <PasswordField fx:id="passOrigField" alignment="CENTER" layoutX="242.0" layoutY="209.0" promptText="New Password" />
+      <PasswordField fx:id="passConfirmField" alignment="CENTER" layoutX="242.0" layoutY="257.0" promptText="Confirm Password" />
+      <TextField fx:id="userField" alignment="CENTER" layoutX="242.0" layoutY="161.0" promptText="Username" />
+      <Label layoutX="413.0" layoutY="165.0" text="\@javamail.com" />
+      <Button fx:id="signUpBtn" layoutX="297.0" layoutY="307.0" mnemonicParsing="false" onAction="#SignUp" text="Sign Up" />
+      <Label layoutX="142.0" layoutY="463.0" text="Meant to log in? " />
+      <Button fx:id="switchToLoginBtn" layoutX="129.0" layoutY="493.0" mnemonicParsing="false" onAction="#switchToLogin" text="Click here to login" />
+   </children>
+</AnchorPane>

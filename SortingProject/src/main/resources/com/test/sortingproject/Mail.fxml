@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="810.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.test.sortingproject.MailController">
+   <children>
+      <ListView fx:id="mainMailView" layoutX="376.0" layoutY="50.0" prefHeight="335.0" prefWidth="420.0" />
+      <Label layoutX="308.0" layoutY="34.0" text="Sort by:" />
+      <Label fx:id="senderLabel" layoutX="377.0" layoutY="34.0" onMouseClicked="#SortBySender" text="Sender" />
+      <Label fx:id="dateLabel" layoutX="434.0" layoutY="34.0" onMouseClicked="#SortByDate" text="Date" />
+      <Label fx:id="titleLabel" layoutX="474.0" layoutY="34.0" onMouseClicked="#SortByTitle" text="Title" />
+      <TextArea fx:id="mailMessageBox" editable="false" layoutX="42.0" layoutY="54.0" prefHeight="327.0" prefWidth="318.0" />
+   </children>
+</AnchorPane>
