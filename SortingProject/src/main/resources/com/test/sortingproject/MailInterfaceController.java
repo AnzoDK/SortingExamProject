@@ -6,30 +6,14 @@ package com.test.sortingproject;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
  *
  * @author stefan
  */
-public class LoginController implements Initializable {
-
-    @FXML
-    private Button btnLogin;
-    @FXML
-    private TextField txEmail;
-    @FXML
-    private TextField txPassword;
-    @FXML
-    private Text clkSignUp;
-    
-
-    
+public class MailInterfaceController implements Initializable {
 
     /**
      * Initializes the controller class.
@@ -37,11 +21,6 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
-    
-    @FXML
-    void switchToMailInterface()
-    {
-    }
+    }    
     
 }
