@@ -14,11 +14,8 @@
    <children>
       <Pane layoutX="400.0" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #00bfff;">
          <children>
-<<<<<<< HEAD
-            <Button fx:id="btnLogin" layoutX="252.0" layoutY="308.0" mnemonicParsing="false" onAction="#switchToMailInterface" style="-fx-background-color: #1e90ff;" text="Login" />
-=======
+
             <Button fx:id="btnLogin" layoutX="252.0" layoutY="308.0" mnemonicParsing="false" onAction="#Login" style="-fx-background-color: #1e90ff;" text="Login" />
->>>>>>> a58be2a96a23b363d5d0b12ab9b6f6acb7ed81e2
             <Text layoutX="164.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ffffff;" text="Login ">
                <font>
                   <Font size="26.0" />
@@ -37,11 +34,7 @@
                </font>
             </Text>
             <Text layoutX="255.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #ffffff;" text="Or" />
-<<<<<<< HEAD
-            <Text fx:id="clkSignUp" layoutX="278.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #0000ff;" text="Sign up" />
-=======
             <Text fx:id="clkSignUp" layoutX="278.0" layoutY="135.0" onMouseClicked="#switchToSignUp" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-fill: #0000ff;" text="Sign up" />
->>>>>>> a58be2a96a23b363d5d0b12ab9b6f6acb7ed81e2
          </children>
       </Pane>
       <Pane prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: #ffffff;">
