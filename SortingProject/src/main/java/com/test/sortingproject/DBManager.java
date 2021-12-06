@@ -10,6 +10,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,26 +20,16 @@ import java.sql.Statement;
 public class DBManager
     {
         public static DBManager INSTANCE = new DBManager();
+                
+        public enum LoginError{SUCCESS, USERNAME_IN_USE, SQLERROR};
+        
         String connPath = "jdbc:sqlite:sql.db";
         Connection conn = null;
         public boolean Login(String username, String password) throws NoSuchAlgorithmException
         {
-            //TODO
-            MessageDigest md = MessageDigest.getInstance("SHA-512");
-            md.update(password.getBytes(StandardCharsets.UTF_8));
-            byte[] bytes = /*md.digest(password.getBytes(StandardCharsets.UTF_8));*/ md.digest();
-            String hash="";
-            StringBuilder hexString = new StringBuilder();
-            for (int i = 0; i < bytes.length; i++) 
-            {
-                String hex = Integer.toHexString(0xff & bytes[i]);
-                if(hex.length() == 1)
-                {
-                    hexString.append('0');
-                }
-                hexString.append(hex);
-            }
-            hash = hexString.toString();
+            
+            String hash = Encryptor.EncryptString(password);
+            
             String getUsernameSql = "SELECT username, password FROM Users WHERE username='" + username + "'";
             try
             {
@@ -75,5 +67,34 @@ public class DBManager
             
             
             return false;
+        }
+        public LoginError Register(String username, String password)
+        {
+            String getUsernameSql = "SELECT username FROM Users WHERE username='" + username + "'";
+            try{
+                conn = DriverManager.getConnection(connPath);
+                Statement stmt = null;
+                stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(getUsernameSql);
+                if(rs.next())
+                {
+                    return DBManager.LoginError.USERNAME_IN_USE;
+                }
+                
+                String hash = Encryptor.EncryptString(password);
+                String registerSQL = "INSERT INTO Users (username, password) VALUES ('" + username + "' , '" + hash + "')";
+                stmt.executeUpdate(registerSQL);
+                return LoginError.SUCCESS;
+                
+            }
+            catch(SQLException e)
+            {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return LoginError.SQLERROR;
+            }
         }
     }
