@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.time.format.*;
+import java.time.*;
 
 /**
  *
@@ -95,6 +98,44 @@ public class DBManager
                     Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 return LoginError.SQLERROR;
+            }
+        }
+        public ArrayList<Mail> RetreiveMails(String username)
+        {
+            ArrayList<Mail> tmp = new ArrayList<Mail>();
+            String sql = "SELECT * FROM Mails WHERE `to`='" + username + "';";
+            try {
+                conn = DriverManager.getConnection(connPath);
+                Statement stmt = null;
+                stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                
+                
+                while(rs.next())
+                {
+                    tmp.add(new Mail(rs.getString("title"), rs.getString("from"),rs.getString("to"),rs.getString("sendTime"), rs.getString("message")));
+                }
+                stmt.close();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            return tmp;
+
+        }
+        public boolean AddMail(Mail m)
+        {
+            DateTimeFormatter t = DateTimeFormatter.ofPattern("yyyy/MM/dd:HH:mm:ss");
+            String sql = "INSERT INTO Mails(`title`,`from`, `to`, `sendTime`, `message`) VALUES ('" + m.title + "' , '" + m.from + "' , '" + m.to + "' , '" + m.sendTime.format(t) + "' , '" + m.message + "');";
+            try {
+                conn = DriverManager.getConnection(connPath);
+                Statement stmt = null;
+                stmt = conn.createStatement();
+                stmt.executeUpdate(sql);
+                return false;
+            } catch (SQLException ex) {
+                Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+                return false;
             }
         }
     }
