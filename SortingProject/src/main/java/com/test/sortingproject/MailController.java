@@ -1,5 +1,6 @@
 package com.test.sortingproject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -32,6 +33,12 @@ public class MailController implements Initializable {
     Label titleLabel;
     
     @FXML
+    Button sendMailBtn;
+    
+    @FXML
+    Button logOutBtn;
+    
+    @FXML
     ListView mainMailView;
     
     @FXML
@@ -42,8 +49,9 @@ public class MailController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        SortByDate();
         mails = GetMails();
+        SortByDate();
+        
         SortReload();
         mainMailView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() 
         {
@@ -115,6 +123,21 @@ public class MailController implements Initializable {
                         mails.set(c, m);
                         diff++;
                     }
+                    else if((int)mails.get(c).title.charAt(0) == (int)mails.get(c+1).title.charAt(0))
+                    {
+                        int j = 1;
+                        while(((int)mails.get(c).title.charAt(j) == (int)mails.get(c+1).title.charAt(j)) || (j >= mails.get(c).title.length() || j >= mails.get(c+1).title.length()))
+                        {
+                            j++;
+                        }
+                        if((int)mails.get(c).title.charAt(j) > (int)mails.get(c+1).title.charAt(j))
+                        {
+                            Mail m = new Mail(mails.get(c+1));
+                            mails.set(c+1, new Mail(mails.get(c)));
+                            mails.set(c, m);
+                            diff++;
+                        }
+                    }
                     c++;
                 }
                 break;
@@ -175,7 +198,7 @@ public class MailController implements Initializable {
         mainMailView.getItems().clear();
         for(int i = 0; i < mails.size(); i++)
         {
-            mainMailView.getItems().add(mails.get(0).CreateString());
+            mainMailView.getItems().add(mails.get(i).CreateString());
         }
     }
     
@@ -193,4 +216,17 @@ public class MailController implements Initializable {
         return DBManager.INSTANCE.AddMail(m);
     }
     
+    @FXML
+    void SwitchToSend() throws IOException
+    {
+        App.setRoot("SendMail");
+    }
+    
+    @FXML
+    void LogOut() throws IOException
+    {
+        Holder.INSTANCE.username = "";
+        Holder.INSTANCE.passhash = "";
+        App.setRoot("Login");
+    }
 }

@@ -87,6 +87,7 @@ public class DBManager
                 String hash = Encryptor.EncryptString(password);
                 String registerSQL = "INSERT INTO Users (username, password) VALUES ('" + username + "' , '" + hash + "')";
                 stmt.executeUpdate(registerSQL);
+                stmt.close();
                 return LoginError.SUCCESS;
                 
             }
@@ -110,7 +111,6 @@ public class DBManager
                 stmt = conn.createStatement();
                 ResultSet rs = stmt.executeQuery(sql);
                 
-                
                 while(rs.next())
                 {
                     tmp.add(new Mail(rs.getString("title"), rs.getString("from"),rs.getString("to"),rs.getString("sendTime"), rs.getString("message")));
@@ -123,18 +123,51 @@ public class DBManager
             return tmp;
 
         }
+        public boolean HasUser(String username)
+        {
+            String sql = "SELECT `username` FROM Users WHERE `username`='" + username + "';";
+            Statement stmt = null;
+            try {  
+                conn = DriverManager.getConnection(connPath);
+                stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery(sql);
+                if(rs.next())
+                {
+                    stmt.close();
+                    return true;
+                }
+                stmt.close();
+                return false;
+            } catch (SQLException ex) {
+                try {
+                    Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+                    stmt.close();
+                    return false;
+                } catch (SQLException ex1) {
+                    Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex1);
+                    return false;
+                }
+            }
+        }
         public boolean AddMail(Mail m)
         {
             DateTimeFormatter t = DateTimeFormatter.ofPattern("yyyy/MM/dd:HH:mm:ss");
             String sql = "INSERT INTO Mails(`title`,`from`, `to`, `sendTime`, `message`) VALUES ('" + m.title + "' , '" + m.from + "' , '" + m.to + "' , '" + m.sendTime.format(t) + "' , '" + m.message + "');";
+            Statement stmt = null;
             try {
                 conn = DriverManager.getConnection(connPath);
-                Statement stmt = null;
+                
                 stmt = conn.createStatement();
                 stmt.executeUpdate(sql);
-                return false;
+                stmt.close();
+                return true;
             } catch (SQLException ex) {
                 Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    stmt.close();
+                } catch (SQLException ex1) {
+                    Logger.getLogger(DBManager.class.getName()).log(Level.SEVERE, null, ex1);
+                }
                 return false;
             }
         }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="489.0" prefWidth="675.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/17" fx:controller="com.test.sortingproject.SendMailController">
+   <children>
+      <TextField fx:id="headerField" alignment="CENTER" layoutX="66.0" layoutY="105.0" promptText="Header" />
+      <TextField fx:id="sendToField" alignment="CENTER" layoutX="66.0" layoutY="60.0" promptText="SendTo" />
+      <TextArea fx:id="messageArea" layoutX="66.0" layoutY="151.0" prefHeight="200.0" prefWidth="573.0" promptText="Messsage..." />
+      <Button fx:id="sendBtn" layoutX="588.0" layoutY="360.0" mnemonicParsing="false" onAction="#SendMail" text="Send" />
+   </children>
+</AnchorPane>
